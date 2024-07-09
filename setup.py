@@ -11,15 +11,12 @@ description = 'Collection of algorithms to compute the inverse Radon transform'
 name = 'radontea'
 year = "2014"
 
-sys.path.insert(0, realpath(dirname(__file__))+"/"+name)
-from _version import version  # noqa: E402
 
 
 setup(
     name=name,
     author=author,
     author_email="dev@craban.de",
-    version=version,
     license="BSD (3 clause)",
     url='https://github.com/RI-imaging/radontea',
     packages=find_packages(),

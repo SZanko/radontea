@@ -20,7 +20,7 @@ sdist/
 var/
 *.egg-info/
 .installed.cfg
-*.egg
+*.egg*
 
 # Installer logs
 pip-log.txt
@@ -65,3 +65,4 @@ docs/_build
 .eggs
 .pytest_cache
 .idea
+venv

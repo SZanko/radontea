@@ -1,0 +1,54 @@
+[project]
+name = "radontea"
+dynamic = ["version"]
+description = "Collection of algorithms to compute the inverse Radon transform"
+authors = [
+    {name = "Paul Müller", email = "dev@craban.de"},
+    {name = "SZanko", email = "szanko_dev@proton.me"},
+]
+dependencies = [
+    "setuptools>=70.2.0",
+    "numpy>=1.5.1",
+    "scipy>=1.4.0",
+    "matplotlib>=3.7.5",
+]
+requires-python = ">=3.8.1, <4"
+readme = "README.rst"
+license = {text = "BSD (3 clause)"}
+keywords = ["tomography", "ct", "radon", "computerized tomography", "optical projection tomography"]
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Visualization",
+]
+
+[project.urls]
+Homepage = "https://github.com/RI-imaging/radontea"
+[build-system]
+requires = ["setuptools>=61", "wheel", "setuptools-git-versioning>=2.0,<3"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools-git-versioning]
+enabled = true
+template = "{tag}"
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.package-dir]
+radontea = "src/radontea"
+
+[tool.pdm.dev-dependencies]
+test = [
+    "pytest>=8.2.2",
+]
+lint = [
+    "flake8>=7.1.0",
+    "coverage>=7.5.4",
+]
+docs = [
+    "sphinx==4.3.0",
+    "sphinxcontrib-bibtex>=2.6.2",
+    "sphinx-rtd-theme==1.0",
+]
