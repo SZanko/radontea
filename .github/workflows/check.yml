@@ -5,36 +5,39 @@ on:
   pull_request:
 
 jobs:
-  build:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup PDM
+      uses: pdm-project/setup-pdm@v4
+    - name: Install dependencies
+      run: pdm install -G lint
+    - name: Lint with flake8
+      run: |
+        pdm run flake8 src test
 
+  build:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.9', '3.10']
+        python-version: ['3.10', '3.11']
         os: [macos-latest, ubuntu-latest, windows-latest]
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
+    - uses: actions/checkout@v4
+    - name: Setup PDM
+      uses: pdm-project/setup-pdm@v4
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        # prerequisites
-        python -m pip install --upgrade pip wheel
-        python -m pip install coverage flake8
         # install dependencies
-        pip install -r tests/requirements.txt
-        pip install -e .
-        # show installed packages
-        pip freeze
+        pdm install --prod
+        pdm install -G test
     - name: Test with pytest
       run: |
-        coverage run --source=radontea -m pytest tests
-    - name: Lint with flake8
-      run: |
-        flake8 .
+        pdm run coverage run --source=src/radontea -m pytest test
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3

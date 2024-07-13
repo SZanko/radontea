@@ -8,11 +8,11 @@ authors = [
 ]
 dependencies = [
     "setuptools>=70.2.0",
-    "numpy>=1.5.1",
-    "scipy>=1.4.0",
-    "matplotlib>=3.7.5",
+    "numpy>=1.23.5",
+    "scipy>=1.14.0",
+    "matplotlib>=3.9.1",
 ]
-requires-python = ">=3.8.1, <4"
+requires-python = ">=3.10, <4"
 readme = "README.rst"
 license = {text = "BSD (3 clause)"}
 keywords = ["tomography", "ct", "radon", "computerized tomography", "optical projection tomography"]
@@ -33,6 +33,11 @@ build-backend = "setuptools.build_meta"
 enabled = true
 template = "{tag}"
 
+[tool.pytest.ini_options]
+pythonpath = [
+  ".", "src",
+]
+
 [tool.pdm]
 distribution = true
 
@@ -42,13 +47,16 @@ radontea = "src/radontea"
 [tool.pdm.dev-dependencies]
 test = [
     "pytest>=8.2.2",
+    "coverage>=7.5.4",
 ]
 lint = [
     "flake8>=7.1.0",
-    "coverage>=7.5.4",
 ]
 docs = [
     "sphinx==4.3.0",
     "sphinxcontrib-bibtex>=2.6.2",
     "sphinx-rtd-theme==1.0",
+]
+upload = [
+    "twine>=5.1.1",
 ]
