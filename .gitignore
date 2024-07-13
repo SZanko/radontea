@@ -67,3 +67,4 @@ docs/_build
 .idea
 venv
 .pdm-python
+.devenv

@@ -2,6 +2,8 @@ name: Release to PyPI
 
 on:  
   push:
+    branches:
+      master
     tags:
       - '*'
 
@@ -20,10 +22,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install setuptools wheel twine
         pip install -e .
-    - name: Build and publish
+    - name: Build
+      run: |
+        python setup.py sdist bdist_wheel
+    - name: Publish in main repo
+      if: github.repository == 'RI-imaging/radontea'
       env:
         TWINE_USERNAME: ci_qpi
         TWINE_PASSWORD: ${{ secrets.PYPI_PWD }}
       run: |
-        python setup.py sdist bdist_wheel
         twine upload --skip-existing dist/*
